@@ -2,14 +2,20 @@
 
 declare(strict_types=1);
 
+use App\Actions\StudentCard\GeneratePdf;
 use App\Enums\SchoolEnum;
 use App\Models\StudentCard;
 use App\Models\User;
 use Carbon\Carbon;
+use Mockery\MockInterface;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseCount;
 
 it('can store a student card', function () {
+    \Pest\Laravel\mock(GeneratePdf::class, function (MockInterface $mock) {
+        $mock->shouldReceive('handle')->once();
+    });
+
     actingAs(User::factory()->create())
         ->post(
             uri: route('student-cards.store'),
@@ -20,7 +26,7 @@ it('can store a student card', function () {
                 'is_internal' => $isInternal = fake()->boolean,
                 'date_of_birth' => $dob = Carbon::create('2000', '1', '1')->format('Y-m-d'),
             ]
-        )->assertOk();
+        )->assertRedirectToRoute('dashboard');
 
     assertDatabaseCount('student_cards', 1);
 
