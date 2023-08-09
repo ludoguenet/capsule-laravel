@@ -14,17 +14,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(9)->create();
+        $this->call(RoleSeeder::class);
 
-        \App\Models\User::factory()->create([
-            'name' => 'Super Admin',
-            'email' => 'admin@test.com',
-        ]);
-
-        User::factory(10)
+        User::factory(5)
             ->has(
                 StudentCard::factory(),
             )
-            ->create();
+            ->create()
+            ->each(
+                fn (User $user) => $user->assignRole('student')
+            );
+
+        User::factory(5)
+            ->create()
+            ->each(
+                fn (User $user) => $user->assignRole('teacher')
+            );
+
+        User::factory()->create([
+            'name' => 'Super Admin',
+            'email' => 'admin@test.com',
+        ])->assignRole('Super Admin');
     }
 }
