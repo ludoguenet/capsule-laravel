@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('student-cards')
         ->as('student-cards.')
+        ->middleware('can:student-cards')
         ->group(static function (): void {
             Route::get('/create', \App\Http\Controllers\StudentCard\CreateController::class)->name('create');
             Route::post('/', \App\Http\Controllers\StudentCard\StoreController::class)->name('store');
