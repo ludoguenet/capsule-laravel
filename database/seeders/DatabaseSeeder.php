@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(CourseSeeder::class);
+
         $this->call(RoleSeeder::class);
 
         $teacherRole = Role::firstWhere('name', RoleEnum::TEACHER->value);

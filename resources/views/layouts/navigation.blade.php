@@ -21,6 +21,10 @@
                             {{ __('Ajouter une carte') }}
                         </x-nav-link>
                     @endcan
+
+                    <x-nav-link :href="route('calendar')" :active="request()->routeIs('calendar')">
+                        {{ __('Emploi du temps') }}
+                    </x-nav-link>
                 </div>
             </div>
 
