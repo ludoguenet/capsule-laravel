@@ -41,6 +41,10 @@ class StoreRequest extends FormRequest
                 'min:10',
                 'max:700',
             ],
+            'canteen_price' => [
+                'nullable',
+                'numeric',
+            ],
             'is_internal' => [
                 'required',
                 'boolean',
@@ -58,6 +62,7 @@ class StoreRequest extends FormRequest
     {
         $this->merge([
             'is_internal' => $this->boolean('is_internal'),
+            'user_id' => $this->integer('user_id'),
         ]);
     }
 }

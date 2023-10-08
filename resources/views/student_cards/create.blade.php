@@ -50,6 +50,15 @@
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
 
+                <!-- Canteen Price -->
+                <div class="mt-4">
+                    <x-input-label for="canteen_price" :value="__('Canteen Price')" />
+
+                    <input type="number" step="0.01" id="canteen_price" class="block mt-1 w-full" name="canteen_price" value="{{ old('canteen_price') }}">
+
+                    <x-input-error :messages="$errors->get('canteen_price')" class="mt-2" />
+                </div>
+
                 <!-- Internal -->
                 <div class="block mt-4">
                     <label for="is_internal" class="inline-flex items-center">

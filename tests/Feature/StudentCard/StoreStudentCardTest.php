@@ -28,6 +28,7 @@ it('can store a student card for both teacher and super admin roles', function (
                 'user_id' => $userId = User::factory()->create()->id,
                 'school' => $school = fake()->randomElement(SchoolEnum::cases())->value,
                 'description' => $description = Str::random(16),
+                'canteen_price' => '16.85',
                 'is_internal' => $isInternal = fake()->boolean,
                 'date_of_birth' => $dob = Carbon::create('2000', '1', '1')->format('Y-m-d'),
             ]
@@ -40,6 +41,7 @@ it('can store a student card for both teacher and super admin roles', function (
     expect($studentCard->user_id)->toBe($userId);
     expect($studentCard->school->value)->toBe($school);
     expect($studentCard->description)->toBe($description);
+    expect($studentCard->canteen_price)->toBe(1685);
     expect($studentCard->is_internal)->toBe($isInternal);
     expect($studentCard->date_of_birth->format('Y-m-d'))->toBe($dob);
 })

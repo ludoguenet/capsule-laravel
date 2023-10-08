@@ -20,12 +20,14 @@ class StudentCard extends Model implements HasMedia
         'user_id',
         'school',
         'description',
+        'canteen_price',
         'is_internal',
         'date_of_birth',
     ];
 
     protected $casts = [
         'school' => SchoolEnum::class,
+        'canteen_price' => 'integer',
         'is_internal' => 'boolean',
         'date_of_birth' => 'date',
     ];
